@@ -1,32 +1,30 @@
-/*
-* p39
-* input:一个长度为n的数组，元素在0~n-1的范围内
-* output:任意重复数
-* me:计数排序
-* 答案：快排
-*/
-
 #include <stdio.h>
 
-int FindSame(int list[],int n){
-    int Same[n];
-    int value;
-    for(int index = 0; index < n; index++)
-    {
-        value = list[index];
-        if(Same[value]==1){
-            return value;
-        }else{
-            Same[value]=1;
+int findMatrix(int *matrix,int rows,int cols,int number){
+    int find = 1;
+    if(matrix!=NULL && rows>0 && cols>0){
+        int row = 0;
+        int col = cols - 1;
+        while(row>=0 && col>=0){
+            if(matrix[col*rows+row]==number){
+                find = 0;
+                break;
+            }else if(matrix[col*rows+row]>number){
+                col--;
+            }else{
+                row++;
+            }
         }
     }
-    return NULL;
+
+    return find;
 }
 
 main(int argc, char const *argv[])
 {
-    int list[]= {2,3,1,0,2,5,3};
-    printf("%d\n",FindSame(list,7));
+    int matrix[]={1,2,8,9,2,4,9,12,4,7,10,13,6,8,11,15};
+    int number = 7;
+    printf("%d\n",findMatrix(matrix,4,4,number));
     getchar();
     return 0;
 }
